@@ -1,9 +1,31 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
+  <div *ngIf="!connected">
+    <div class="logo">
+      <ion-icon name="person" color="light"></ion-icon>
+      <img src="../../../assets/logo.jpg" alt="" srcset="">
+    </div>
+
+    <ion-item>
+      <ion-label color="light">Email</ion-label>
+      <ion-input color="light" [(ngModel)]="userForm.email" placeholder="Entrer votre email : " type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light">Mot de passe</ion-label>
+      <ion-input color="light" [(ngModel)]="userForm.password" placeholder="Entrer votre mot de passe : " type="password"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-button fill="clear" slot="end" color="light">Mot de passe oublie ?</ion-button>
+    </ion-item>
+
+    <ion-button fill="outline" color="light" (click)="login()" shape="round" expand="block">Connection</ion-button>
+    <br>
+    <ion-button shape="round" expand="block" color="light">Inscription</ion-button>
+  </div>
+
+  <div *ngIf="connected">
+    <ion-button shape="round" (click)="logout()" expand="block" color="light">Deconnection</ion-button>
+  </div>
 </ion-content>
