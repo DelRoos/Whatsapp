@@ -2,23 +2,20 @@ ion-content {
     --ion-background-color: linear-gradient(#292E49, #536976);
 }
 
-// ion-item {
-//     --ion-background-color: transparent!important;
-// }
-
-.wrapper {
-    text-align: center;
-    // padding-left: 100px;
-}
-
-.block {
-    background: transparent!important;
-    color: white;
+ion-content form {
+    --ion-background-color: black;
 }
 
 .padding {
     padding: 5%;
 }
+.error_message {
+    color: #DC3545;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+}
+
 
 .logo{
     height: 250px;

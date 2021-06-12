@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserServiceService } from '../../services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,44 +13,37 @@ export class LoginPage implements OnInit {
   userForm = {
     email: '',
     password: ''
-  }
-
-  user = {
-    id: '',
-    email: '',
-  }
-
-  connected: boolean;
+  };
 
   constructor(
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public userService: UserServiceService,
+    public router: Router
   ) { }
 
   ngOnInit() {
-    this.afAuth.authState.subscribe(auth => {
-      if (!auth) {
-        this.connected = false;
-        console.log('please log your');
-      } else {
-        this.connected = true;
-        console.log('you are loddes');
-        this.user.id = auth.uid,
-        this.user.email = auth.email
-      }
-    })
   }
 
   login() {
     console.log(this.userForm);
-    this.afAuth.signInWithEmailAndPassword(this.userForm.email, this.userForm.password);
+    this.userService.signIn(this.userForm.email, this.userForm.password)
+    .then((res) => {
+      if(this.userService.isEmailVerified) {
+        this.router.navigate(['/tabs']);
+      }else{
+        window.alert('Email is not verified');
+        return false;
+      }
+    })
+    .catch((error) => {
+      window.alert(error);
+    });
+
+
     this.userForm = {
       email: '',
       password: ''
-    }
-  }
-
-  logout() {
-    this.afAuth.signOut();
+    };
   }
 
 }

@@ -1,8 +1,8 @@
 <ion-content>
 
-  <div *ngIf="!connected">
+  <div class="padding">
     <div class="logo">
-      <ion-icon name="person" color="light"></ion-icon>
+      <!-- <ion-icon name="person" color="light"></ion-icon> -->
       <img src="../../../assets/logo.jpg" alt="" srcset="">
     </div>
 
@@ -17,15 +17,12 @@
     </ion-item>
 
     <ion-item lines="none">
-      <ion-button fill="clear" slot="end" color="light">Mot de passe oublie ?</ion-button>
+      <ion-button fill="clear" slot="end" color="light" [routerLink]="['/password-reset']">Mot de passe oublie ?</ion-button>
     </ion-item>
 
-    <ion-button fill="outline" color="light" (click)="login()" shape="round" expand="block">Connection</ion-button>
     <br>
-    <ion-button shape="round" expand="block" color="light">Inscription</ion-button>
-  </div>
-
-  <div *ngIf="connected">
-    <ion-button shape="round" (click)="logout()" expand="block" color="light">Deconnection</ion-button>
+    <ion-button fill="outline" color="light" (click)="login()" shape="round" expand="block">Connexion</ion-button>
+    <br>
+    <ion-button shape="round" expand="block" [routerLink]="['/signup']"  color="light">Inscription</ion-button>
   </div>
 </ion-content>

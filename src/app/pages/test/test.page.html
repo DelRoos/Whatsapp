@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>test</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-item>
+    <ion-label>Nom: </ion-label>
+    <ion-input type="text" [(ngModel)]="myName"></ion-input>
+  </ion-item>
+
+  <div class="ion-padding">
+    <ion-button (click)="addFire()" expand="block">Add</ion-button>
+  </div>
+
+  <ion-card *ngFor="let image of images">
+    <ion-img [src]="image.profile"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{ image.name }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-item *ngFor="let item of items | async">
+    <ion-label>{{ item.nom }}</ion-label>
+  </ion-item>
+  <app-file-upload></app-file-upload>
+
+</ion-content>

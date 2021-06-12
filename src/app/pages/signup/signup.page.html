@@ -1,0 +1,82 @@
+<ion-content class="padding">
+  <div class="logo">
+    <!-- <ion-icon name="person" color="light"></ion-icon> -->
+    <img src="../../../assets/logo.jpg" alt="" srcset="">
+  </div>
+
+  <form [formGroup]="ValidationFormUser" (ngSubmit)="signUp()">
+    <ion-item class="block">
+      <ion-label>Nom</ion-label>
+      
+      <ion-input 
+        placeholder="Entrer votre nom : " 
+        type="text"
+        formControlName="surname"
+      >
+      </ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validationMessage.surname">
+        <div class="error_message" *ngIf="ValidationFormUser.get('surname').hasError(validation.type) 
+                                          && (ValidationFormUser.get('surname').dirty 
+                                          || ValidationFormUser.get('surname').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <ion-item class="block">
+      <ion-label>Email</ion-label>
+      
+      <ion-input
+        placeholder="Entrer votre adresse email : " 
+        type="email"
+        formControlName="email"
+      >
+      </ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validationMessage.email">
+        <div class="error_message" *ngIf="ValidationFormUser.get('email').hasError(validation.type) 
+                                          && (ValidationFormUser.get('email').dirty 
+                                          || ValidationFormUser.get('email').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
+
+
+
+    <ion-item>
+      <ion-label >Password</ion-label>
+      
+      <ion-input 
+        placeholder="Entrer votre mot de passe : " 
+        type="password"
+        formControlName="password"
+      >
+      </ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validationMessage.password">
+        <div class="error_message" *ngIf="ValidationFormUser.get('password').hasError(validation.type) 
+                                          && (ValidationFormUser.get('password').dirty 
+                                          || ValidationFormUser.get('password').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
+
+    <br>
+    <ion-button fill="outline" color="light" type="submit" shape="round" [disabled]="!ValidationFormUser.valid" expand="block" >
+        Inscription
+    </ion-button>
+    
+    <ion-button shape="round" color="light"  expand="block" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+      Connexion
+    </ion-button>
+
+  </form>
+
+</ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -10,7 +11,8 @@ export class Tab1Page implements OnInit{
 
   constructor
   (
-    public afDB: AngularFireDatabase
+    public afDB: AngularFireDatabase,
+    public afAuth: AngularFireAuth
   ) {
 
   }
@@ -26,4 +28,7 @@ export class Tab1Page implements OnInit{
     })
   }
 
+  logout() {
+    this.afAuth.signOut();
+  }
 }
