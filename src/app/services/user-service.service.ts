@@ -31,7 +31,9 @@ export class UserServiceService {
      }
 
   signIn(email: string, password: string){
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.signInWithEmailAndPassword(email, password).then(res => {
+      localStorage.setItem('user', JSON.stringify(res.user));
+    });
   }
 
   register(email: string, password: string, name: string){

@@ -54,7 +54,10 @@ export class SignupPage implements OnInit {
       this.ValidationFormUser.value.email,
       this.ValidationFormUser.value.password,
       this.ValidationFormUser.value.surname
-      );
-    this.router.navigate(['/login']);
+      ).then(res => {
+        this.router.navigate(['/login']);
+      }).catch(error => {
+        console.log(error);
+      });
   }
 }

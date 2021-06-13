@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        Change
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Chats</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar class="sub-menu">
+    <ion-button fill="clear" slot="end"  [routerLink]="['/password-reset']">Nouveau groupe </ion-button>
+    <ion-icon></ion-icon>
+    <ion-button fill="clear" slot="end"  [routerLink]="['/password-reset']">Utilisateur</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list>
+    <ion-item button detail="false" *ngFor="let chat of chatsList" [routerLink]="['/chat-detail', chat.id]"
+      routerdirection="forward">
+      <ion-avatar slot="start" style="width: 52px;height:52px">
+        <img [src]="chat.avatar">
+      </ion-avatar>
+      <ion-label>
+        {{chat.first_name}} {{chat.last_name}}
+        <small class="ion-float-right">
+          <ion-text color="medium">17.10.2020</ion-text>
+        </small>
+        <p>
+          <ion-text color="medium">
+            {{chat.last_message}}
+          </ion-text>
+        </p>
+        <p>&nbsp;</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

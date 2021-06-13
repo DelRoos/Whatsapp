@@ -7,17 +7,17 @@
     </div>
 
     <ion-item>
-      <ion-label color="light">Email</ion-label>
-      <ion-input color="light" [(ngModel)]="userForm.email" placeholder="Entrer votre email : " type="email"></ion-input>
+      <ion-label >Email</ion-label>
+      <ion-input  [(ngModel)]="userForm.email" placeholder="Entrer votre email : " type="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="light">Mot de passe</ion-label>
-      <ion-input color="light" [(ngModel)]="userForm.password" placeholder="Entrer votre mot de passe : " type="password"></ion-input>
+      <ion-label >Mot de passe</ion-label>
+      <ion-input  [(ngModel)]="userForm.password" placeholder="Entrer votre mot de passe : " type="password"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
-      <ion-button fill="clear" slot="end" color="light" [routerLink]="['/password-reset']">Mot de passe oublie ?</ion-button>
+      <ion-button fill="clear" slot="end"  [routerLink]="['/password-reset']">Mot de passe oublie ?</ion-button>
     </ion-item>
 
     <br>

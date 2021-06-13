@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
     this.userService.signIn(this.userForm.email, this.userForm.password)
     .then((res) => {
       if(this.userService.isEmailVerified) {
-        this.router.navigate(['/tabs']);
+        this.router.navigate(['/home']);
       }else{
         window.alert('Email is not verified');
         return false;
@@ -38,7 +38,6 @@ export class LoginPage implements OnInit {
     .catch((error) => {
       window.alert(error);
     });
-
 
     this.userForm = {
       email: '',
