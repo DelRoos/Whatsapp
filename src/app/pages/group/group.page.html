@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create new group</ion-title>
+
+    <ion-button slot="end" (click)="dismissModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  
+  <div class="md-cards" *ngIf="users.length !== 0">
+    <div class="containerGroup">
+        <ion-title>List user</ion-title>
+
+        <div class="userGroup">
+
+          <ion-item>
+            <ion-chip>
+              <ion-avatar>
+                <img [src]="currentUser.profile">
+              </ion-avatar>
+              <ion-label>Vous</ion-label>
+            </ion-chip>
+          </ion-item>
+
+          <ion-item *ngFor="let user of users">
+            <ion-chip>
+              <ion-avatar>
+                <img [src]="user.profile">
+              </ion-avatar>
+              <ion-label>{{user.name}}</ion-label>
+            </ion-chip>
+          </ion-item>
+        </div>
+
+        <ion-button slot="end" (click)="setUserSelected()" *ngIf="!userHasSelect">
+          give information of group <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+  </div>
+  <ion-title *ngIf="users.length === 0">Select member of group</ion-title>
+  
+  <div *ngIf="userHasSelect">
+    <ion-title >Information of group</ion-title>
+
+    <div class="block">
+      <ion-item>
+        <ion-label>Describe</ion-label>
+
+        <ion-input
+          placeholder="description" 
+          type="email"
+          [(ngModel)]="describe"
+        >
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Only admins can write</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="onlyAdmin"></ion-checkbox>
+      </ion-item>
+    
+    </div>
+
+    <ion-button shape="round" color="light" (click)="createGroup()"  expand="block" >
+      Create
+    </ion-button>
+  </div>
+
+  <ion-list *ngIf="!userHasSelect">
+    <ion-item detail="false" *ngFor="let user of userService.users; let index" >
+      <ion-avatar slot="start" style="width: 52px;height:52px">
+        <img [src]="user.uid">
+      </ion-avatar>
+      <ion-label>
+        {{user.name}}
+        <p>
+          <ion-text color="medium">
+            {{user.email}}
+          </ion-text>
+        </p>
+        <p>&nbsp;</p>
+      </ion-label>
+      <ion-checkbox slot="end" (ionChange)="addUserInGroup($event, user)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

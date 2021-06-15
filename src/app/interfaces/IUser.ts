@@ -4,4 +4,6 @@ export interface IUser {
     name: string;
     profile: string;
     emailVerified: boolean;
+    lastConnection: Date;
+    isCurrentLogged: boolean;
 }

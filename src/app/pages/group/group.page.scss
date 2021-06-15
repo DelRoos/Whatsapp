@@ -1,0 +1,14 @@
+.userGroup {
+    width: 90%;
+    display: flex!important;
+    flex-direction: row!important;
+    overflow-x: auto !important;
+}
+
+.containerGroup {
+    display: flex;
+    flex-direction: column;
+}
+ion-item{
+    background-color: inherit;
+}

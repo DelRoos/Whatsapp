@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { element } from 'protractor';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
@@ -57,6 +56,11 @@ export class TestPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  setTheme() {
+  console.log("ok");
+  document.documentElement.style.setProperty("--ion-color-primary", "#f4f5f8");
+  document.documentElement.style.setProperty("--ion-color-dark", "#FFF");
   }
 
 }

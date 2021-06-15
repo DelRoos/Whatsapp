@@ -32,6 +32,18 @@ const routes: Routes = [
   {
     path: 'password-reset',
     loadChildren: () => import('./pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
+  {
+    path: 'all-users',
+    loadChildren: () => import('./pages/all-users/all-users.module').then( m => m.AllUsersPageModule)
+  },
+  {
+    path: 'chat-detail/:id',
+    loadChildren: () => import('./pages/chat-detail/chat-detail.module').then( m => m.ChatDetailPageModule)
+  },
+  {
+    path: 'group',
+    loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
   }
 ];
 @NgModule({

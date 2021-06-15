@@ -31,9 +31,18 @@ export class UserServiceService {
      }
 
   signIn(email: string, password: string){
+
     return this.afAuth.signInWithEmailAndPassword(email, password).then(res => {
+      const userRef: AngularFirestoreDocument<any> = this.afST.doc(`users/${res.user.uid}`);
+      userRef.update({
+        isCurrentLogged: true
+      });
       localStorage.setItem('user', JSON.stringify(res.user));
     });
+  }
+
+  getCurrentUser(): IUser{
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   register(email: string, password: string, name: string){
@@ -55,7 +64,8 @@ export class UserServiceService {
 
   get isLogged(): boolean{
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    // return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null) ? true : false;
   }
 
   get isEmailVerified(): boolean{
@@ -72,18 +82,33 @@ export class UserServiceService {
       email: user.email,
       name: userName,
       profile: userProfile,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      lastConnection: this.getDateWithoutTimeZone(new Date()),
+      isCurrentLogged: false
     };
     return userRef.set(userData, { merge:true });
   }
 
-
-
   signOut(){
     return this.afAuth.signOut()
             .then(()=>{
+
+              const userRef: AngularFirestoreDocument<any> = this.afST.doc(`users/${this.userData.uid}`);
+              userRef.update({
+                lastConnection: this.getDateWithoutTimeZone(new Date()),
+                isCurrentLogged: false
+              });
+
               localStorage.removeItem('user');
               this.router.navigate(['/login']);
             });
+  }
+
+  getDateWithoutTimeZone(date: Date){
+    const result =new Date(date);
+    if (result.toString().indexOf('GMT+') > 0) {
+      result.setHours(result.getHours() - result.getTimezoneOffset()/60);
+    }
+    return result;
   }
 }

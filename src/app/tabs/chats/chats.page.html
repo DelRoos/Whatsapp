@@ -9,7 +9,7 @@
     <ion-title>Chats</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="logOut()">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,9 +20,9 @@
   </ion-toolbar>
 
   <ion-toolbar class="sub-menu">
-    <ion-button fill="clear" slot="end"  [routerLink]="['/password-reset']">Nouveau groupe </ion-button>
+    <ion-button fill="clear" slot="end"(click)="modalGroup()">Nouveau groupe </ion-button>
     <ion-icon></ion-icon>
-    <ion-button fill="clear" slot="end"  [routerLink]="['/password-reset']">Utilisateur</ion-button>
+    <ion-button fill="clear" slot="end" (click)="listModalUser()" >Utilisateur</ion-button>
   </ion-toolbar>
 </ion-header>
 

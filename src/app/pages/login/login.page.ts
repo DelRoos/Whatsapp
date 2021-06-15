@@ -28,16 +28,19 @@ export class LoginPage implements OnInit {
     console.log(this.userForm);
     this.userService.signIn(this.userForm.email, this.userForm.password)
     .then((res) => {
-      if(this.userService.isEmailVerified) {
-        this.router.navigate(['/home']);
-      }else{
-        window.alert('Email is not verified');
-        return false;
-      }
+      // if(this.userService.isEmailVerified) {
+      //   this.router.navigate(['/tabs/chats']);
+      // }else{
+      //   window.alert('Email is not verified');
+      //   return false;
+      // }
+      this.router.navigate(['/tabs/chats']);
     })
     .catch((error) => {
       window.alert(error);
     });
+
+    console.log('pand have travel');
 
     this.userForm = {
       email: '',

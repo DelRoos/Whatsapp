@@ -55,6 +55,7 @@ export class SignupPage implements OnInit {
       this.ValidationFormUser.value.password,
       this.ValidationFormUser.value.surname
       ).then(res => {
+        this.ValidationFormUser.reset();
         this.router.navigate(['/login']);
       }).catch(error => {
         console.log(error);

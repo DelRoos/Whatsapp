@@ -8,7 +8,7 @@
 
 
   <ion-item>
-    <ion-label>Nom: </ion-label>
+    <ion-label color="primary">Nom: </ion-label>
     <ion-input type="text" [(ngModel)]="myName"></ion-input>
   </ion-item>
 
@@ -27,5 +27,9 @@
     <ion-label>{{ item.nom }}</ion-label>
   </ion-item>
   <app-file-upload></app-file-upload>
-
+  
+  <div class="ion-padding">
+    <ion-button (click)="setTheme()" expand="block">Add</ion-button>
+  </div>
+  
 </ion-content>

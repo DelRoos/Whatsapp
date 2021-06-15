@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/chats"></ion-back-button>
+    </ion-buttons>
+
+    <ion-item lines="none" class="user-toolbar" *ngIf="user">
+      <ion-avatar slot="start">
+        <img [src]="user.profile">
+      </ion-avatar>
+      <ion-label class="ion-no-margin">
+        {{user.name}}
+        <p class="ion-no-margin">
+          {{connection}}
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="videocam-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="call-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-item-sliding class="message-item-sliding" *ngFor="let message of chats; let index = index; let last = last"
+  #slidingItem (ionDrag)="messageDraged($event, slidingItem)">
+
+  <!-- User message -->
+  <ng-container *ngIf="message.type === 'user'">
+    <ion-item lines="none" class="message-user"
+      [ngClass]="{'user-last-message': chats[index + 1]?.type === 'me' || last}">
+      <div class="message-container">
+        <span class="text" [innerHTML]="message.message"></span>
+        <small class="time">{{message.date | amDateFormat:'HH:mm'}}</small>
+      </div>
+    </ion-item>
+  </ng-container>
+
+  <!-- My message -->
+  <ng-container *ngIf="message.type === 'me'">
+    <ion-item lines="none" class="message-me">
+      <div class="message-container" slot="end">
+        <span class="text" [innerHTML]="message.message"></span>
+        <div class="time">
+          <small>{{message.date | amDateFormat:'HH:mm'}}</small>
+          <ion-icon color="primary" name="checkmark-done-outline"></ion-icon>
+        </div>
+      </div>
+    </ion-item>
+  </ng-container>
+
+  <!-- Reply slide -->
+  <ion-item-options side="end" class="no-border">
+    <ion-item-option disabled style="--background: var(--ion-item-background);">
+      <ion-icon slot="icon-only" name="arrow-undo-outline" color="primary"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
+
+
+</ion-content>
+
+
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar style="height: auto;">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-textarea autoGrow rows="1" [placeholder]="'messages_title'"></ion-textarea>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="camera-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="mic-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

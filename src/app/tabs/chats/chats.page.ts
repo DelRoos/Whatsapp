@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-// import { PlatformService } from '../../services/platform/platform.service';
-// import { FakerService } from '../../services/faker/faker.service';
+import { UserServiceService } from '../../services/user-service.service';
+import { UsersService } from '../../services/users.service';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { AllUsersPage } from '../../pages/all-users/all-users.page';
+import { GroupPage } from '../../pages/group/group.page';
 
 @Component({
   selector: 'app-chats',
@@ -9,29 +14,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatsPage implements OnInit {
   chatsList: any[] = [];
+  userList = [];
 
   constructor(
-    // public platformService: PlatformService,
-    // private fakerService: FakerService
-  ) { }
+    public authService: UserServiceService,
+    public userService: UsersService,
+    public firestore: AngularFirestore,
+    public modalCtrl: ModalController
+  ) {
+  }
+
+  logOut() {
+    this.authService.signOut();
+  }
 
   dataInit() {
-    // this.fakerService.getFaker().then((faker) => {
-    //   this.chatsList = Array.apply(null, Array(25)).map(() => {
-    //     const gender = faker.random.arrayElements([1, 0])[0];
-    //     return {
-    //       id: faker.random.uuid(),
-    //       first_name: faker.name.firstName(gender),
-    //       last_name: faker.name.lastName(gender),
-    //       email: faker.internet.email(),
-    //       avatar: faker.internet.avatar(),
-    //       last_message: faker.lorem.sentence()
-    //     };
-    //   });
-    // });
+    this.userList = this.userService.users;
   }
 
   ngOnInit() {
     this.dataInit();
   }
+
+
+  async listModalUser() {
+    const modal = await this.modalCtrl.create({
+      component: AllUsersPage
+    });
+    modal.onDidDismiss().then((data) => {
+    });
+    await modal.present();
+  }
+
+  async modalGroup() {
+    const modal = await this.modalCtrl.create({
+      component: GroupPage
+    });
+    modal.onDidDismiss().then((data) => {
+    });
+    await modal.present();
+  }
+
 }
